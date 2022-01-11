@@ -1,5 +1,5 @@
 const orderNumberField = document.getElementById('orderNumberField'); /* поле текста номера вопроса */
-const answerField = document.getElementById('answerField'); /* поле текста вопросов и сообщений */
+const answerField = document.getElementById('answerField'); /* поле текста вопросов и ответов */
 let minValue; /* минимальное значение */
 let maxValue; /* максимальное значение */
 let answerNumber; /* значение ответа */
@@ -7,6 +7,38 @@ let gameRun; /* статус работы игры */
 let orderNumber; /* номер вопроса */
 let phraseRandom; /* номер выводимого вопроса или сообщения */
 
+let num0 = 0;
+let num1 = 'один'; /* вывод числа в тесктовой форме */
+let num2 = 'два';
+let num3 = 'три';
+let num4 = 'четыре';
+let num5 = 'пять';
+let num6 = 'шесть';
+let num7 = 'семь';
+let num8 = 'восемь';
+let num9 = 'девять';
+let num10 = 'десять';
+let num11 = 'одинадцать';
+let num12 = 'двенадцать';
+let num13 = 'тринадцать';
+let num14 = 'четырнадцать';
+let num15 = 'пятнадцать';
+let num16 = 'шестнадцать';
+let num17 = 'семнадцать';
+let num18 = 'восемнадцать';
+let num19 = 'девятнадцать';
+let num20 = 'двадцать';
+let num30 = 'тридцать';
+let num40 = 'сорок';
+let num50 = 'пятьдесят';
+let num60 = 'шестьдесят';
+let num70 = 'семьдесят';
+let num80 = 'восемьдесят';
+let num90 = 'девяносто';
+let param1;
+let param2;
+let param3;
+let param_sign;
 
 function StartGame() { /* функция ввода значений для начала игры */ 
     minValue = parseInt(prompt('Укажите минимальное значение числа для игры','0')) || 0; /* если NaN, то минимальное значение по умолчанию 0 */
@@ -19,8 +51,29 @@ function StartGame() { /* функция ввода значений для на
     gameRun = true; 
     orderNumberField.innerText = orderNumber;
     answerField.style.color = 'black'; 
-    answerField.innerText = `Вы загадали число ${answerNumber }?`;
+    answerField.innerText = `Вы загадали число ${answerNumber } ?`;
 }    
+
+function Reply(form1, form2, form3) { /* функция вывода случайных сообщений */
+    phraseRandom = Math.round(Math.random()*2); /* 3 варианта сообщения в случайном порядке*/
+    switch (phraseRandom) { 
+        case 0: return form1;
+        case 1: return form2;
+        case 2: return form3;
+    }
+} 
+
+function Text_Value(input_number) {
+    param_sign = (input_number < 0) ? 'минус ' : '';
+    switch (input_number) {
+        case 0:
+            param1 = num0
+
+        
+    }
+    return answerNumber = param_sign + param1;
+}
+
 
 StartGame(); /* запуск игры */
 
@@ -28,76 +81,32 @@ document.getElementById('btnRetry').addEventListener('click', StartGame); /* к�
 
 document.getElementById('btnOver').addEventListener('click', function () { /* кнопка "больше" */    
     if (gameRun){
-        if (minValue === maxValue){
+        if (minValue >= maxValue){
             answerField.style.color = 'blue'; /* цвет сообщения в случае неудачи */
-            phraseRandom = Math.round(Math.random()*2); /* 3 варианта сообщения в случае неудачи */
-            switch (phraseRandom) { 
-                case 0: 
-                    answerField.innerText = `Вы загадали неправильное число!\n\u{1F914}`;
-                    break;
-                case 1:
-                    answerField.innerText = `Я сдаюсь..\n\u{1F92F}`;
-                    break;
-                case 2:
-                    answerField.innerText = `Очень странно, что я не угадал...\n\u{1F612}`;
-                    break;
-            }
+            answerField.innerText = Reply('Вы загадали неправильное число!\n\u{1F914}', 'Я сдаюсь..\n\u{1F92F}', 'Очень странно, что я не угадал...\n\u{1F612}');
             gameRun = false;
         } else {
-            minValue = answerNumber + 1;
+            minValue = ++answerNumber;
             answerNumber  = Math.floor((minValue + maxValue) / 2);
             orderNumber++;
             orderNumberField.innerText = orderNumber;
-            phraseRandom = Math.round(Math.random()*2); /* 3 варианта вопросов */
-            switch (phraseRandom) {
-                case 0: 
-                    answerField.innerText = `Вы загадали число ${answerNumber }?`;
-                    break;
-                case 1:
-                    answerField.innerText = `Скорее всего, это число ${answerNumber }. Верно?`;
-                    break;
-                case 2:
-                    answerField.innerText = `Проще простого! Это число ${answerNumber }?`;
-                    break;
-            }
+            answerField.innerText = Reply('Вы загадали число ', 'Наверное, это число ', 'Проще простого! Это число ') + answerNumber + ' ?';
         }
     }
 })
 
 document.getElementById('btnLess').addEventListener('click', function () { /* кнопка "меньше" */
     if (gameRun){
-        if (minValue === maxValue){
+        if (minValue >= maxValue){
             answerField.style.color = 'blue'; /* цвет сообщения в случае неудачи */
-            phraseRandom = Math.round(Math.random()*2); /* 3 варианта сообщения в случае неудачи */
-            switch (phraseRandom) {
-                case 0: 
-                    answerField.innerText = `Вы загадали неправильное число!\n\u{1F914}`;
-                    break;
-                case 1:
-                    answerField.innerText = `Я сдаюсь..\n\u{1F92F}`;
-                    break;
-                case 2:
-                    answerField.innerText = `Очень странно, что я не угадал...\n\u{1F612}`;
-                    break;
-            }
+            answerField.innerText = Reply('Вы загадали неправильное число!\n\u{1F914}', 'Я сдаюсь..\n\u{1F92F}', 'Очень странно, что я не угадал...\n\u{1F612}');
             gameRun = false;
         } else {
-            maxValue = answerNumber - 1;
+            maxValue = --answerNumber;
             answerNumber  = Math.ceil((minValue + maxValue) / 2);
             orderNumber++;
             orderNumberField.innerText = orderNumber;
-            phraseRandom = Math.round(Math.random()*2); /* 3 варианта вопросов */
-            switch (phraseRandom) {
-                case 0: 
-                    answerField.innerText = `Вы загадали число ${answerNumber }?`;
-                    break;
-                case 1:
-                    answerField.innerText = `Скорее всего, это число ${answerNumber }. Верно?`;
-                    break;
-                case 2:
-                    answerField.innerText = `Проще простого! Это число ${answerNumber }?`;
-                    break;
-            }
+            answerField.innerText = Reply('Вы загадали число ', 'Наверное, это число ', 'Проще простого! Это число ') + answerNumber + ' ?';
         }
     }
 })
@@ -105,19 +114,7 @@ document.getElementById('btnLess').addEventListener('click', function () { /* к
 document.getElementById('btnEqual').addEventListener('click', function () {
     if (gameRun){
         answerField.style.color = 'red'; /* цвет сообщения в случае успеха */
-        phraseRandom = Math.round(Math.random()*2); /* 3 варианта сообщения в случае успеха */
-        switch (phraseRandom) {
-            case 0: 
-                answerField.innerText = `Я всегда угадываю!\n\u{1F60E}`;
-                break;
-            case 1:
-                answerField.innerText = `Меня невозможно выиграть!\n\u{1F60E}`;
-                break;
-            case 2:
-                answerField.innerText = `Я читаю Ваши мысли!\n\u{1F60E}`;
-                break;
-        }
+        answerField.innerText = Reply('Я всегда угадываю!\n\u{1F60E}', 'Меня невозможно выиграть!\n\u{1F60E}', 'Я читаю Ваши мысли!\n\u{1F60E}');
         gameRun = false;
     }
 })
-
