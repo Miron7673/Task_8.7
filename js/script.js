@@ -184,11 +184,12 @@ function Text_Value(input_number) {
 }
 
 function StartGame() { /* функция ввода значений для начала игры */ 
-    minValue = parseInt(prompt('Укажите минимальное значение числа для игры','0')) || 0; /* если NaN, то минимальное значение по умолчанию 0 */
-    maxValue = parseInt(prompt('Укажите максимальное значение числа для игры','100')) || 100; /* если NaN, то максимальное значение по умолчанию 100 */
+    minValue = parseInt(document.getElementById('minimum').value) || 0; /* если NaN, то минимальное значение по умолчанию 0 */
+    maxValue = parseInt(document.getElementById('maximum').value) || 100; /* если NaN, то максимальное значение по умолчанию 100 */
     minValue = (minValue < -999) ? -999 : minValue; /* при вводе минимума меньше -999 число изменяется на -999 */
     maxValue = (maxValue > 999) ? 999 : maxValue; /* при вводе максимума больше 999 число изменяется на 999 */
-    alert(`Загадайте любое целое число от ${minValue} до ${maxValue}, а я его угадаю`);
+    document.getElementById('minimum').value = minValue; 
+    document.getElementById('maximum').value = maxValue; 
     answerNumber  = ((minValue + maxValue) / 2 | 0);
     orderNumber = 1;
     gameRun = true; 
@@ -196,10 +197,7 @@ function StartGame() { /* функция ввода значений для на
     answerField.style.color = 'black'; 
     answerField.innerText = 'Вы загадали число ' + Text_Value(answerNumber) + ' ?';
 }    
-
-StartGame(); /* запуск игры */
-
-document.getElementById('btnRetry').addEventListener('click', StartGame); /* кнопка "Заново" запускает начало игры */
+document.getElementById('btnStart').addEventListener('click', StartGame); /* запуск игры */
 
 document.getElementById('btnOver').addEventListener('click', function () { /* кнопка "больше" */   
     if (gameRun){
@@ -240,3 +238,7 @@ document.getElementById('btnEqual').addEventListener('click', function () {
         gameRun = false;
     }
 })
+
+document.getElementById('btnRetry').addEventListener('click', function(){ /* кнопка "Заново" сбрасывает все значения на исходные перезапуском кода */
+    window.location.reload();
+}); 

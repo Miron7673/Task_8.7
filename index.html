@@ -12,6 +12,19 @@
 <div class="container">
     <div class="row game-card align-items-center">
         <div class="col col-md-4 offset-md-4">
+                <p><strong>Загадайте любое целое число в указанном Вами диапазоне, нажмите кнопку "Старт игры", и я его угадаю!</strong></p>             
+                <div class = "form-group">
+                   <label for = "name">Минимальное значение числа</label>
+                   <input type = "text" class = "form-control" placeholder = "0" id="minimum">
+                   <label for = "name">Максимальное значение числа</label>
+                   <input type = "text" class = "form-control" placeholder = "100" id="maximum">
+                </div>
+           
+            <div class="card-body text-center">
+                <button class="btn btn-outline-danger btn-lg" id="btnStart">Старт игры</button>
+            </div>
+            
+
             <div class="card text-center">
                 <div class="card-header">
                     <p class="m-0">Вопрос №<span id="orderNumberField"></span></p>
